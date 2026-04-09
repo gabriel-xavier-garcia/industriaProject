@@ -1,6 +1,7 @@
 import entities.Funcionario;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.Month;
@@ -86,12 +87,21 @@ public class Main {
                 .sorted(Comparator.comparing(Funcionario::getNome))
                 .forEach(f -> System.out.println(f.getNome()));
 
-
         // Soma total dos salários
         BigDecimal total = funcionarios.stream()
                 .map(Funcionario::getSalario)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         System.out.println("\nTotal salários: " + nf.format(total));
+
+        // Quantidade de salários mínimos
+
+        BigDecimal salarioMinimo = new BigDecimal("1212");
+
+        System.out.println("\n -------- Salários mínimos --------");
+        funcionarios.forEach(f -> {
+            BigDecimal qtd = f.getSalario().divide(salarioMinimo, 2, RoundingMode.HALF_UP);
+            System.out.println(f.getNome() + ": " + qtd);
+        });
     }
 }
