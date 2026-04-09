@@ -3,6 +3,7 @@ import entities.Funcionario;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class Main {
         funcionarios.add(new Funcionario("Helena", LocalDate.of(1996, 9, 2), new BigDecimal("2799.93"), "Gerente"));
 
 
-        // Remover João da lista (1)
+        // Remover João da lista
         funcionarios.removeIf(f -> f.getNome().equalsIgnoreCase("João"));
 
         // Conversão da data para padrão pedido no desafio
@@ -62,5 +63,13 @@ public class Main {
             System.out.println(funcao + ":");
             lista.forEach(f -> System.out.println(" - " + f.getNome()));
         });
+
+        // Aniversariantes mês 10 e 12
+        System.out.println("\n -------- Aniversariantes (Outubro e Dezembro) --------");
+        funcionarios.stream()
+                .filter(f -> f.getDataNascimento().getMonth() == Month.OCTOBER ||
+                        f.getDataNascimento().getMonth() == Month.DECEMBER)
+                .forEach(f -> System.out.println(f.getNome()));
+        
     }
 }
