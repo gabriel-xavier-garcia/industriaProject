@@ -79,5 +79,11 @@ public class Main {
             int idade = Period.between(maisVelho.getDataNascimento(), LocalDate.now()).getYears();
             System.out.println("\n Mais Velho: " + maisVelho.getNome() + " - " + idade + " anos");
         }
+
+        // Ordem alfabética
+        System.out.println("\n -------- Ordem alfabética --------");
+        funcionarios.stream()
+                .sorted(Comparator.comparing(Funcionario::getNome))
+                .forEach(f -> System.out.println(f.getNome()));
     }
 }
