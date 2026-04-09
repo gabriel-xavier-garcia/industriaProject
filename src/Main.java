@@ -85,5 +85,13 @@ public class Main {
         funcionarios.stream()
                 .sorted(Comparator.comparing(Funcionario::getNome))
                 .forEach(f -> System.out.println(f.getNome()));
+
+
+        // Soma total dos salários
+        BigDecimal total = funcionarios.stream()
+                .map(Funcionario::getSalario)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        System.out.println("\nTotal salários: " + nf.format(total));
     }
 }
