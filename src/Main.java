@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -49,6 +51,16 @@ public class Main {
             f.setSalario(f.getSalario().multiply(new BigDecimal(1.10)));
         });
 
-        
+        // Agrupar por função
+        Map<String, List<Funcionario>> agrupados =
+                funcionarios.stream()
+                        .collect(Collectors.groupingBy(Funcionario::getFuncao));
+
+        // Imprimir agrupados
+        System.out.println("\n -------- Funcionários de cada setor --------");
+        agrupados.forEach((funcao, lista) -> {
+            System.out.println(funcao + ":");
+            lista.forEach(f -> System.out.println(" - " + f.getNome()));
+        });
     }
 }
