@@ -4,11 +4,9 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -70,6 +68,16 @@ public class Main {
                 .filter(f -> f.getDataNascimento().getMonth() == Month.OCTOBER ||
                         f.getDataNascimento().getMonth() == Month.DECEMBER)
                 .forEach(f -> System.out.println(f.getNome()));
-        
+
+
+        // Funcionário mais velho
+        Funcionario maisVelho = funcionarios.stream()
+                .min(Comparator.comparing(Funcionario::getDataNascimento))
+                .orElse(null);
+
+        if (maisVelho != null){
+            int idade = Period.between(maisVelho.getDataNascimento(), LocalDate.now()).getYears();
+            System.out.println("\n Mais Velho: " + maisVelho.getNome() + " - " + idade + " anos");
+        }
     }
 }
