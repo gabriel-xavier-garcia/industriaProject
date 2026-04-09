@@ -90,7 +90,8 @@ public class Main {
         // Soma total dos salários
         BigDecimal total = funcionarios.stream()
                 .map(Funcionario::getSalario)
-                        .reduce(BigDecimal.ZERO, BigDecimal::add);
+                        .reduce(BigDecimal.ZERO, BigDecimal::add)
+                                .setScale(2, RoundingMode.HALF_UP);
 
 
         System.out.println("\nTotal salários: " + nf.format(total));
